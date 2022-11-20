@@ -3,7 +3,13 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage : {
+        'hero-img' : 'url("./Assets/images/Rectangle.png")',
+        'social-img' : 'url("./Assets/images/Rectangle 15.png")',
+
+        }
+    },
   },
   plugins: [],
 }
