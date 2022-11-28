@@ -6,7 +6,6 @@ function Footer() {
         <div className="grid grid-flow-col">
             <div className="grid-cols-1"></div>
         </div>
-
     </div>
   )
 }

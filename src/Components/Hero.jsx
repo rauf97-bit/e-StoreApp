@@ -1,8 +1,8 @@
 import React from 'react'
 function Hero() {
   return (
-    <div className='bg-hero-img h-[88vh] items-center flex justify-center'>
-        <div className="w-1/3 ">
+    <div className='bg-hero-img bg-cover h-[88vh] items-center flex justify-center'>
+        <div className="w-4/5 md:w-1/3 ">
         <p className="px-2 text-2xl mb-8 text-center font-bold  capitalize">
             Lorem ipsum dolor sit laborum vitae illum delectus ratione qui sunt?
         </p>

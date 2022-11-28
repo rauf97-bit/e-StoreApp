@@ -10,7 +10,7 @@ function Contact() {
             <p className="text-white text-2xl text-center">
                 Social Media
             </p>
-            <p className="text-white text-xl">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat, magni!</p>
+            <p className="text-white text-center sm:text-start text-xl">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat, magni!</p>
             <div className="flex justify-center items-center my-2">.
                 {socials.map(icon => <img src={icon} className='h-8 mx-2' alt ='icon' key={icon} />)}
             </div>
