@@ -8,17 +8,17 @@ function Checkout() {
     <div>
         <Navbar />
         <div className="pt-5 px-4 my-5">
-            <div className="flex justify-between gap-x-10">
+            <div className="flex flex-col sm:flex-row justify-between gap-x-10">
                 <div className="flex-1">
                     <h1 className="mb-3 text-5xl font-semibold">PAYMENT</h1>
                     <div className="flex flex-col justify-between h-[88%]">
-                        <div className="">
-                            <div className="p-2 my-1 border border-gray-700 rounded-md w-[90%]">
+                        <div className="mb-10 sm:mb-0">
+                            <div className="p-2 my-1 border border-gray-700 rounded-md w-[100%] sm:w-[90%]">
                             <input type="checkbox" name="checkbox" className='p-2 border border-gray-700 rounded-md' id="checkbox" value='Paystack' />
                             <label htmlFor="checkbox" className='ml-3 text-2xl'>Paystack</label>
                             </div>
 
-                            <div className="p-2 my-1 border border-gray-700 rounded-md w-[90%]">
+                            <div className="p-2 my-1 border border-gray-700 rounded-md w-[100%] sm:w-[90%]">
                                 <input type="checkbox" name="checkbox" className='p-2 border border-gray-700 rounded-md' id="checkbox" value='Paystack' />
                                 <label htmlFor="checkbox" className='ml-3 text-2xl'>Cash</label>
                             </div>
@@ -32,7 +32,7 @@ function Checkout() {
                 </div>
 
                 <div className="flex-1">
-                    <img src={img} alt="Payment" className='h-96 w-[90%]' />
+                    <img src={img} alt="Payment" className='h-96 hidden sm:block w-[90%]' />
                 </div>
             </div>
         </div>

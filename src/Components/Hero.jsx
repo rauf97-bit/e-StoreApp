@@ -1,12 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 function Hero() {
   return (
-    <div className=' bg-gradient-to-l bg-hero-img bg-cover h-[88vh] items-center flex justify-center'>
+    <div className=' bg-hero-img bg-cover bg-center h-[100vh] items-center flex justify-center'>
         <div className="w-4/5 md:w-1/3 ">
-        <p className="px-2 text-2xl mb-8 text-center font-bold  capitalize">
-            Lorem ipsum dolor sit laborum vitae illum delectus ratione qui sunt?
-        </p>
-        <button className="rounded-md font-semibold w-full p-2 text-center bg-white hover:bg-blue-500 hover:text-white">Shop now</button>
+          <p className="text-white mt-8 px-2 text-5xl mb-8 text-center font-bold  capitalize">
+            Welcome Back !
+          </p>
+          <button className="rounded-md font-bold text-xl w-full p-2 text-center hover:bg-white bg-red-600 hover:text-red-600 text-white"><Link to={'/login'}>Shop now</Link></button>
         </div>
     </div>
   )

@@ -5,14 +5,12 @@ import img3 from '../Assets/icons/Frame2.svg'
 function Contact() {
     const socials = [img1, img2, img3]
   return (
-    <div className='h-[40vh] flex justify-center items-center bg-social-img bg-center'>
-        <div className="p-5">
-            <p className="text-white text-2xl text-center">
-                Social Media
-            </p>
-            <p className="text-white text-center sm:text-start text-xl">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat, magni!</p>
-            <div className="flex justify-center items-center my-2">.
-                {socials.map(icon => <img src={icon} className='h-8 mx-2' alt ='icon' key={icon} />)}
+    <div className=' flex bg-center mb-10 h-max'>
+        <div className="">
+            <p className=" sm:text-start text-xl">Be the first to hear about our biggest and best sales........</p>
+            <p className="border border-b relative"></p>
+            <div className="flex md:justify-center md:items-center my-6">.
+                {socials.map(icon => <img src={icon} className='bg-black h-8 mx-6' alt ='icon' key={icon} />)}
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@ import React from 'react'
 
 function ProductCard({item}) {
   return (
-    <div className='grid-cols-1 relative py-2'>
+    <div className='grid-cols-1 relative py-4 shadow-lg'>
       {item.discount ? <span className="absolute py-2 p-3 bg-red-600 text-white text-xl right-0 top-o">{item.discount}</span> : null}
         <img src={item.img} className='h- h-5/6 mb-3' alt="product" />
         <p className="font-semibold text-xl">{item.title}</p>
