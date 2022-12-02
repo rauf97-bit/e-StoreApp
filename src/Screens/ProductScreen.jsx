@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from '../Components/Navbar'
 import img from '../Assets/images/Image1.png'
-import likeImg from '../Assets/icons/like_img.png'
 import downImg from '../Assets/icons/Path.svg'
 
 function ProductScreen() {
@@ -11,11 +10,8 @@ function ProductScreen() {
         <section className='p-4 flex sm:flex-row flex-col justify-between items-start'>
             <img src={img} alt="produtImg" className='sm:mr-3 m-auto mb-2 sm:mb-0 sm:w-1/2 w-5/6 h-[75vh]' srcset="" />
             <div className="ml-3 sm:w-1/2 w-full flex flex-col justify-between">
-                <div className="flex justify-between items-center">
-                    <p className="text-2xl font-bold">Product</p>
-                    <img src={likeImg} alt="likes" srcset="" />
-                </div>
-                    <div className="my-2">
+                    <p className="text-2xl font-bold">Yeezy's</p>
+                     <div className="my-2">
                     <p className="price text-red-600 text-3xl font-bold">$44.50</p>
                     </div>
 
