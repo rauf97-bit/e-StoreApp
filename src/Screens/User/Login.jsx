@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../Context/AuthContext";
+import { UserAuth } from "../../Context/AuthContext";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +12,7 @@ function Login() {
     setError("");
     try {
       await signInUser(email, password);
-      navigate("/home");
+      navigate("/user/home");
     } catch (err) {
       console.log(err.message);
       setError("Failed to Login check email and password");
@@ -85,7 +85,7 @@ function Login() {
                     >
                       Login
                     </button>
-                    <Link to={"/adminlogin"}>
+                    <Link to={"/admin/adminlogin"}>
                       <p className="text-blue-600 text-2xl underline font-xl">
                         Admin Login
                       </p>
@@ -93,13 +93,11 @@ function Login() {
                   </div>
                   <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                     Don't have an account?
-                    <Link to="/signup">
-                      <a
-                        href="#!"
-                        className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
-                      >
-                        Register
-                      </a>
+                    <Link
+                      to="/signup"
+                      className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                    >
+                      Register
                     </Link>
                   </p>
                 </div>

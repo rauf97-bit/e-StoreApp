@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../Context/AuthContext";
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const { resetPassword } = UserAuth();
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -51,9 +53,12 @@ function ForgotPassword() {
                 </div>
 
                 <div className="flex justify-around items-center mb-6">
-                  <Link to={"/login"} className="text-gray-800">
+                  <button
+                    onClick={() => navigate(-1)}
+                    className="text-gray-800"
+                  >
                     Back to Login
-                  </Link>
+                  </button>
                 </div>
 
                 <div className="text-center lg:text-left">

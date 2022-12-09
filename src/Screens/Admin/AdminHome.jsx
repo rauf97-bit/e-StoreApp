@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../Context/AuthContext";
+import { UserAuth } from "../../Context/AuthContext";
 
-function Home() {
+function AdminHome() {
   const navigate = useNavigate();
   const { user, logout } = UserAuth();
   const [error, setError] = useState("");
@@ -10,7 +10,7 @@ function Home() {
     setError("");
     try {
       await logout();
-      navigate("/login");
+      navigate("/admin/adminlogin");
     } catch (err) {
       setError("Failed to Logout");
     }
@@ -18,6 +18,9 @@ function Home() {
   console.log(user);
   return (
     <div className="text-center mt-5">
+      <p className="text-4xl mb-3 text-center font-bold text-purple-800">
+        Admin
+      </p>
       <p className="text-3xl text-center">Welcome {user && user.email}</p>
       <button
         onClick={handleSubmit}
@@ -30,4 +33,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default AdminHome;

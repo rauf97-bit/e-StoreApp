@@ -18,7 +18,7 @@ function Signup() {
     try {
       if (passwordRef.current.value === passwordConfirmRef.current.value) {
         await createUser(email, password);
-        navigate("/home");
+        navigate("/user/home");
         setLoading(true);
       }
       return setError("Passwords do not match");
@@ -106,7 +106,7 @@ function Signup() {
                 </div>
                 <p className="text-gray-800 ">
                   Already have an account{" "}
-                  <Link to={"/login"} className="text-blue-500 ">
+                  <Link to={"/user/login"} className="text-blue-500 ">
                     Sign In
                   </Link>
                 </p>
