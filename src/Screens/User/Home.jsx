@@ -1,27 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar";
+// import { AddUserContext } from "../../Context/addUserContext";
 import { UserAuth } from "../../Context/AuthContext";
+import { db } from "../../firebase";
 
 function Home() {
   const navigate = useNavigate();
-  const { user, logout } = UserAuth();
+  const { currentUser, logout } = UserAuth();
   const [error, setError] = useState("");
+
   const handleSubmit = async () => {
     setError("");
     try {
       await logout();
       navigate("/user/login");
     } catch (err) {
-      setError("Failed to Logout");
+      setInterval(() => {
+        setError("");
+      }, 4000);
+      return setError("Failed to Logout");
     }
   };
-  console.log(user);
+  const fetchUserData = async () => {
+    const response = db.collection("users").get();
+    // const userData = await response.get();
+    console.log(response);
+  };
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  // console.log(currentUser);
   return (
     <>
       <Navbar />
       <div className="text-center mt-5">
-        <p className="text-3xl text-center">Welcome {user && user.email}</p>
+        <p className="text-3xl text-center">
+          Welcome{" "}
+          <span className="uppercase font-semibold">
+            {currentUser && currentUser.Fullname}
+          </span>
+        </p>
+        <p className="text-3xl text-center">
+          You Logged in using {currentUser && currentUser.email}
+        </p>
         <button
           onClick={handleSubmit}
           className="p-3 bg-black text-white rounded-md text-center mt-4"

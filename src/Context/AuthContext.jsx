@@ -3,21 +3,35 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth } from "../firebase";
-
+import { auth, db } from "../firebase";
+import { addDoc, collection } from "firebase/firestore";
 const UserContext = createContext();
 
 export function AuthContextProvider({ children }) {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({});
-  const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const [currentUser, setCurrentUser] = useState({});
+  const createUser = async (email, password, Fullname, tel) => {
+    return createUserWithEmailAndPassword(auth, email, password).then(
+      async (userCredentials) => {
+        console.log(userCredentials);
+        try {
+          const docRef = await addDoc(collection(db, "users"), {
+            Fullname,
+            tel,
+            userId: `${userCredentials.user.uid}`,
+          });
+          console.log(docRef.id);
+        } catch (error) {}
+        // const user = userCredentials.user;
+      }
+    );
   };
-  const signInUser = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+
+  const signInUser = async (email, password) => {
+    await signInWithEmailAndPassword(auth, email, password);
+    return;
   };
   const logout = () => {
     return signOut(auth);
@@ -26,16 +40,30 @@ export function AuthContextProvider({ children }) {
     return sendPasswordResetEmail(auth, email);
   };
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-      setLoading(false);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setCurrentUser(user);
+        setLoading(false);
+        console.log(user);
+      }
     });
-    return unsubscribe;
+
+    // const unsubscribe = auth.onAuthStateChanged((user) => {
+    //   setUser(user);
+    //   setLoading(false);
+    // });
+    // return unsubscribe;
   }, []);
 
   return (
     <UserContext.Provider
-      value={{ createUser, user, signInUser, logout, resetPassword }}
+      value={{
+        createUser,
+        currentUser,
+        signInUser,
+        logout,
+        resetPassword,
+      }}
     >
       {children}
     </UserContext.Provider>

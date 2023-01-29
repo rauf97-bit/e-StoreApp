@@ -16,7 +16,10 @@ function AdminLogin() {
       navigate("/admin/admin-home");
     } catch (err) {
       console.log(err.message);
-      setError("Failed to Login check email and password");
+      setInterval(() => {
+        setError("");
+      }, 3000);
+      return setError("Failed to Login check email and password");
     }
   };
   return (

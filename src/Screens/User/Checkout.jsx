@@ -1,12 +1,11 @@
 import React from "react";
-import Navbar from "../../Components/Navbar";
+import { useNavigate } from "react-router-dom";
 import img from "../../Assets/images/Feature_img2.png";
-import { Link } from "react-router-dom";
 
 function Checkout() {
+  const navigate = useNavigate();
   return (
     <div>
-      <Navbar />
       <div className="pt-5 px-4 my-5">
         <div className="flex flex-col sm:flex-row justify-between gap-x-10">
           <div className="flex-1">
@@ -41,9 +40,13 @@ function Checkout() {
               </div>
 
               <div className="py-3 flex justify-between items-center">
-                <Link to={"/cart"} className="text-blue-500 underline">
-                  Go back
-                </Link>
+                <button
+                  onClick={() => navigate(-1)}
+                  to={"/cart"}
+                  className="text-2xl p-2 font-semibold text-blue-500 underline"
+                >
+                  &lt; Go back
+                </button>
                 <button
                   className="p-3 text-white bg-red-600 text-3xl font-bold"
                   id="checkoutPrice"

@@ -1,30 +1,69 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import { AddUserContext } from "../Context/addUserContext";
 import { UserAuth } from "../Context/AuthContext";
 function Signup() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [username, setUsername] = useState("");
-  const [contact, setContact] = useState("");
-  const [error, setError] = useState("");
-  const { createUser } = UserAuth();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
+  const { createUser, currentUser } = UserAuth();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [userData, setUserData] = useState({
+    Fullname: "",
+    email: "",
+    tel: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [error, setError] = useState("");
+  const userHandler = (e) => {
+    const { name, value } = e.target;
+    console.log(name + "::::" + value);
+    setUserData((pre) => {
+      return {
+        ...pre,
+        [name]: value,
+      };
+    });
+  };
+  // const { dispatch } = useContext(AddUserContext);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      if (passwordRef.current.value === passwordConfirmRef.current.value) {
-        await createUser(email, password);
+      const { Fullname, email, tel, password, confirmPassword } = userData;
+      if (
+        Fullname === "" ||
+        email === "" ||
+        tel === "" ||
+        password === "" ||
+        confirmPassword === ""
+      ) {
+        setInterval(() => {
+          setError("");
+        }, 4000);
+        return setError("Please fill the required fields");
+      } else if (password !== confirmPassword) {
+        setInterval(() => {
+          setError("");
+        }, 4000);
+        return setError("Passwords do not match");
+      } else {
+        createUser(email, password, Fullname, tel);
         navigate("/user/home");
+        currentUser &&
+          setUserData({
+            Fullname: "",
+            email: "",
+            tel: "",
+            password: "",
+            confirmPassword: "",
+          });
         setLoading(true);
       }
-      return setError("Passwords do not match");
+      // dispatch({ type: "NEW_USERNAME", payload: username });
+      // dispatch({ type: "NEW_USER_CONTACT", payload: contact });
     } catch (err) {
       console.log(err.message);
-      setError("Failed to create an account");
     }
     setLoading(false);
   };
@@ -48,16 +87,20 @@ function Signup() {
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput1"
                   placeholder="Full name"
-                  onChange={(e) => setUsername(e.target.value)}
+                  name="Fullname"
+                  value={userData.Fullname}
+                  onChange={userHandler}
                 />
               </div>
               <div className="mb-6">
                 <input
                   type="email"
+                  value={userData.email}
+                  name="email"
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput2"
                   placeholder="Email address"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={userHandler}
                 />
               </div>
               <div className="mb-6">
@@ -65,9 +108,10 @@ function Signup() {
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   type="tel"
                   name="tel"
-                  id="tel "
+                  id="tel"
                   placeholder="Phonenumber"
-                  onChange={(e) => setContact(e.target.value)}
+                  value={userData.tel}
+                  onChange={userHandler}
                 />
               </div>
               <div className="mb-6">
@@ -76,8 +120,9 @@ function Signup() {
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput3"
                   placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  ref={passwordRef}
+                  name="password"
+                  value={userData.password}
+                  onChange={userHandler}
                 />
               </div>
               <div className="mb-6">
@@ -86,7 +131,9 @@ function Signup() {
                   className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleFormControlInput4"
                   placeholder="Confirm Password"
-                  ref={passwordConfirmRef}
+                  name="confirmPassword"
+                  value={userData.confirmPassword}
+                  onChange={userHandler}
                 />
               </div>
 

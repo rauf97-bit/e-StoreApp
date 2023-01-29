@@ -15,7 +15,10 @@ function Login() {
       navigate("/user/home");
     } catch (err) {
       console.log(err.message);
-      setError("Failed to Login check email and password");
+      setInterval(() => {
+        setError("");
+      }, 4000);
+      return setError("Failed to Login check email and password");
     }
   };
   return (
@@ -33,7 +36,9 @@ function Login() {
             <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
               <form onSubmit={handleSubmit}>
                 {error && (
-                  <p className="bg-red-500 p-3 my-2 text-xl ">{error}</p>
+                  <p className="bg-red-500 p-3 py-2 my-2 text-xl rounded-md ">
+                    {error}
+                  </p>
                 )}
                 <p className="text-4xl text-gray-800 text-center font-semibold my-4 sm:mb-6">
                   Hi User,
